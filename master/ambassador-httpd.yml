@@ -1,0 +1,35 @@
+# ---
+# apiVersion: getambassador.io/v3alpha1
+# kind: Listener
+# metadata:
+#   name: http-listener
+#   namespace: ambassador
+# spec:
+#   port: 80
+#   protocol: HTTP
+#   securityModel: INSECURE
+#   hostBinding:
+#     namespace:
+#       from: SELF   # See below
+# s
+---
+apiVersion: getambassador.io/v2
+kind: Mapping
+metadata:
+  name: httpd-services-mapping
+  namespace: ambassador
+spec:
+  service: httpd-services.ambassador:80
+  hostname: dev-cluster-testing.ztmesh.io
+  prefix: /test
+
+---
+apiVersion: getambassador.io/v2
+kind: Mapping
+metadata:
+  name: httpd-services-mapping
+  namespace: ambassador
+spec:
+  service: httpd-services.ambassador:80
+  hostname: dev-cluster-testing.ztmesh.io
+  prefix: /backend
